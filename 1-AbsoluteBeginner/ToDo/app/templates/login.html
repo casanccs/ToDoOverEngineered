@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <a href="{% url 'CreateAccount' %}">Create Account</a>
+    <h1>Login Here:</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label>Username: </label>
+        <input type="text" name="username"/>
+        <br>
+        <label>Password:</label>
+        <input type="password" name="password"/>
+        <br>
+        <input type="submit" value="Login" />
+    </form>
+{% endblock %}

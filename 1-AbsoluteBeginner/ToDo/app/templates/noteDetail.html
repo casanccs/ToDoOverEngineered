@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <a href="{% url 'NotesList' %}">Notes List</a>
+    <a href="{% url 'DeleteNote'  note.id %}">Delete Note</a>
+    <form method="POST">
+        {% csrf_token %}
+        <label>Title: </label>
+        <input type="text" value="{{note.title}}" name="title"/>
+        <br>
+        <label>Text:</label>
+        <input type="text" value="{{note.text}}" name="text"/>
+        <br>
+        <input type="submit" value="Update Note" />
+    </form>
+{% endblock %}

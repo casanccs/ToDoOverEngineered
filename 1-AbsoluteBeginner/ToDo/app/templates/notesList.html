@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+    <h1>Notes Page</h1>
+    <h2>Profile: {{profile.user.username}}</h2>
+    <a href="{% url 'CreateNote' %}">Create Note</a>
+    <a href="{% url 'Logout' %}">Logout</a>
+    {% for note in notes %}
+        <a href="{% url 'NoteDetail' note.id %}" class="note">
+            <h3>{{note.title}}</h3>
+            <p>{{note.text}}</p>
+        </a>
+    {% endfor %}
+{% endblock %}
