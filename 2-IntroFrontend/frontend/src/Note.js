@@ -1,9 +1,9 @@
 import { useParams, Link, redirect} from "react-router-dom";
 import {useState, useEffect} from 'react';
-
+import { getCSRFToken } from "./App"
 
 //THIS IS IMPORTANT!!! For the input "value" attribute, I first used "note?.title", but it didn't update the screen. It's because we must reset the note STATE, which we don't do every keystroke.
-export default function Note(){
+export default function Note({user}){
     let noteId = useParams()['id']
     let [note, setNote] = useState({title: '', text: ''})
 
@@ -21,11 +21,14 @@ export default function Note(){
         setNote(data)
     }
 
-    async function createNote(){
+    async function createNote(e){
+        e.preventDefault()
+        const csrfToken = await getCSRFToken()
         let response = await fetch(`/api/note/${noteId}`, {
             method: "POST",
             headers: {
                 "Content-type": "application/json",
+                'X-CSRFToken': csrfToken,
             },
             body: JSON.stringify(note)
         })
@@ -34,11 +37,14 @@ export default function Note(){
         window.location.replace('/')
     }
 
-    async function updateNote(){
+    async function updateNote(e){
+        e.preventDefault()
+        const csrfToken = await getCSRFToken()
         let response = await fetch(`/api/note/${noteId}`, { // PUT
             method: "PUT",
             headers: {
                 "Content-type": "application/json",
+                'X-CSRFToken': csrfToken,
             },
             body: JSON.stringify(note)
         })
@@ -48,8 +54,12 @@ export default function Note(){
     }
 
     async function deleteNote(){ // An issue is after deleting the note and sending me back to Notes List, the deleted note is still there because it didn't refresh the page!!
+        const csrfToken = await getCSRFToken()
         let response = await fetch(`/api/note/${noteId}`, {
-            method: "DELETE"
+            method: "DELETE",
+            headers: {
+                'X-CSRFToken': csrfToken,
+            },
         })
         let data = await response.json()
         console.log(data)
@@ -64,10 +74,10 @@ export default function Note(){
             {noteId != "new" && (<Link onClick={deleteNote}>Delete Note</Link>)}
             <form>
                 <label>Title: </label>
-                <input type="text" value={note.title} onChange={e => setNote({...note, title: e.target.value})} name="title"/>
+                <input type="text" value={note.title} onChange={e => setNote({...note, title: e.target.value})}/>
                 <br />
                 <label>Text:</label>
-                <input type="text" value={note.text} onChange={e => setNote({...note, text: e.target.value})} name="text"/>
+                <input type="text" value={note.text} onChange={e => setNote({...note, text: e.target.value})}/>
                 <br />
                 {noteId === "new" ? (<input type="submit" onClick={createNote} value="Create Note" />): (<input type="submit" onClick={updateNote} value="Update Note" />)}
             </form>

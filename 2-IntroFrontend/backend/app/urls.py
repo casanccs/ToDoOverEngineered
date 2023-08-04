@@ -17,10 +17,8 @@ from django.urls import path
 from .views import *
 urlpatterns = [
     path('getRoutes/', getRoutes),
+    path('get-csrf-token/', get_csrf_token),
     path('notes/', NotesList.as_view()),
     path('note/<str:id>', NoteView.as_view()),
-    path('register'),
-    path('login'),
-    path('logout'),
-    path('user'),
+    path('user/', UserView.as_view()),
 ]
