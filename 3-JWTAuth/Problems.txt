@@ -1,0 +1,3 @@
+Current Problems:
+(Done) Easy way to cheat the API. Could send a PUT/DELETE with the id in the url without actually owning the note
+* Token Expires after 1 hour, need to know how to refresh it

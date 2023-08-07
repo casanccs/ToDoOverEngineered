@@ -74,13 +74,11 @@ def CreateAccount(request):
         return HttpResponseRedirect(reverse('NotesList'))
     
 def Login(request):
-     if request.method == "GET":
+    if request.method == "GET":
         return render(request, "login.html")
-     if request.method == "POST":
+    if request.method == "POST":
         form = request.POST
-        print(form['username'], form['password'])
         user = authenticate(username=form['username'], password=form['password'])
-        print(user)
         if user:
             login(request,user)
             return HttpResponseRedirect(reverse('NotesList'))
