@@ -1,0 +1,7 @@
+1. Added Dockerfiles, and Docker Compose file!
+2. Changed "proxy" of the frontend's "package.json" file to be the NAME of the backend's Docker Container, which is: "backend"
+3. In settings for Django, changed "ALLOWED_HOSTS = []" to "ALLOWED_HOSTS = ['*']"
+
+
+Note:
+1. This only works in development, as "proxy" only has effect using "npm start".
