@@ -1,11 +1,6 @@
-1. Updated docker compose file
-    - Removed the migrate from backend's Dockerfile, because when using PostgreSQL, the migrate DEPENDS ON PostgreSQL to already be running and in the network to use as a HOST in the
-        settings file. Also removed the runserver command.
-    - In the compose file, we needed a "depends_on" and other options to allow the backend container to wait for the db container. Placed the migrate and runserver command in the backend
-        command option in order to run them when PostgreSQL was running already. Note that the depends_on option waits only for it to start, not be running.
-2. pip installed "psycopg2"
-3. Updated settings.py
+1. Added nginx conf file, with a very simple reverse proxy to the react development server and django development server.
 
 
 Note:
-1. It is NOT recommended to run any database as a Docker Container. Docker recommends using Docker for stateless services.
+1. This is NOT how you use nginx in production however, because you must build the static files from react and SERVE them using nginx.
+2. You also must use GUNICORN as the WSGI server. Currently I am using Django's test/development web server.

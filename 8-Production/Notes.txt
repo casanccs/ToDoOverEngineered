@@ -1,0 +1,10 @@
+Because of deployment and pushing to Github, there are many environment variables needed. Some are:
+1. SECRET_KEY
+2. DEBUG
+3. ALLOWED_HOSTS
+4. Other custom keys
+
+
+1. Using gunicorn and environment variables in the backend service
+2. MUST RUN "npm run build" FIRST!!
+3. Moved nginx files and changed compose build location, BECAUSE I CANNOT get the react build from up a directory.

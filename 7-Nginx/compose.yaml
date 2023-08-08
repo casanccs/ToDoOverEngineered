@@ -31,3 +31,11 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+  nginx:
+    build: ./nginx
+    ports:
+      - 80:80  # Map container port 80 to host port 80
+    depends_on:
+      - backend
+      - frontend
+    

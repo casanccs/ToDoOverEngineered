@@ -1,0 +1,19 @@
+What Microservices can I split up for this?
+
+1. Notes
+    1. Note List
+    2. Create Note
+    3. Delete Note
+    4. Update Note
+    5. Get Note
+
+2. Authentication
+    1. Google Authentication
+    2. Login
+    3. Logout
+    4. Create User
+
+Need "pika" package for RabbitMQ
+
+
+We can use a Viewset to list all notes/other functionality
