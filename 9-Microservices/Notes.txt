@@ -17,3 +17,5 @@ Need "pika" package for RabbitMQ
 
 
 We can use a Viewset to list all notes/other functionality
+
+1. pika.ConnectionParameters make sure you use correct ip/dns
